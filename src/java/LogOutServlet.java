@@ -38,7 +38,7 @@ public class LogOutServlet extends HttpServlet {
         PrintWriter out = response.getWriter();
         
         // Output HTML content
-        ResponseBuilder.buildRedirectResponse(out, (user != null ? user.getUsername() + ", you are successfully logged out!" : "You are successfully logged out!"), "admin-login.html");
+        ResponseBuilder.buildRedirectResponse(out, (user != null ? user.getUsername() + ", you are successfully logged out!" : "You are successfully logged out!"), "admin-login.jsp");
         
     }
 }

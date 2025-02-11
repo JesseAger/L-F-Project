@@ -6,7 +6,7 @@ package business;
 
 /**
  *
- * @author FABIUS
+ 
  */
 public class User {
     private String username;

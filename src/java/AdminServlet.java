@@ -45,18 +45,18 @@ public class AdminServlet extends HttpServlet {
                         response.addCookie(ck);
                         if (SessionCheck.isUserLoggedIn(request)) {
                             // User is logged in, continue with the logic
-                            ResponseBuilder.buildRedirectResponse(out, "Successful login, welcome " + username + "!", "records.html");
+                            ResponseBuilder.buildRedirectResponse(out, "Successful login, welcome " + username + "!", "records.jsp");
                         } 
                         else {
                             // User is not logged in, redirect to login page
-                            ResponseBuilder.buildRedirectResponse(out, "You are not logged in. Please log in to continue.", "admin-login.html");
+                            ResponseBuilder.buildRedirectResponse(out, "You are not logged in. Please log in to continue.", "admin-login.jsp");
                         }
                         
                        
  
                     } else {
                         // Authentication failed, display error message
-                        ResponseBuilder.buildRedirectResponse(out, "Authentication failed. Please check your username and password.", "admin-login.html");
+                        ResponseBuilder.buildRedirectResponse(out, "Authentication failed. Please check your username and password.", "admin-login.jsp");
                     }
                 }
             } catch (SQLException ex) {

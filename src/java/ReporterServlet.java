@@ -49,7 +49,7 @@ public class ReporterServlet extends HttpServlet {
                 ResultSet rs = checkStatement.executeQuery();
                 if (rs.next()) {
                     // Inform the reporter that the report already exists
-                    ResponseBuilder.buildRedirectResponse(out, "Report already exists. Please do not repeat the same report.", "report.html");
+                    ResponseBuilder.buildRedirectResponse(out, "Report already exists. Please do not repeat the same report.", "report.jsp");
                     return; // Exit the method to prevent duplicate insertion
                 }
             }
@@ -71,10 +71,10 @@ public class ReporterServlet extends HttpServlet {
                  if (rowsInserted > 0) {
                      // Display success message
                 
-                     ResponseBuilder.buildRedirectResponse(out, "Reporter details inserted successfully! Kindly visit the security department for verification and confirmation of yoiur lost item.", "index.html");
+                     ResponseBuilder.buildRedirectResponse(out, "Reporter details inserted successfully! Kindly visit the security department for verification and confirmation of your lost item.", "homepage.jsp");
                      
                  } else {
-                     ResponseBuilder.buildRedirectResponse(out, "Failed to insert reporter details. Please try again.", "report.html");
+                     ResponseBuilder.buildRedirectResponse(out, "Failed to insert reporter details. Please try again.", "report.jsp");
                  }
              }
              catch (SQLException ex) {
