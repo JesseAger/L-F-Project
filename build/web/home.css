@@ -1,0 +1,116 @@
+:root {
+    --primary-color: #00A651;
+    --secondary-color: #D2AC67;
+    --tertiary-color: #BCBEC1;
+    --text-color: #fff;
+    --shadow-color: rgba(0, 0, 0, 0.2);
+}
+
+header {
+    width: 100%;
+    max-width: 100%;
+    padding: 10px 0; /* Ensure padding for spacing */
+    background-color: inherit; /* Keeps background consistent */
+}
+
+html, body {
+    height: auto;  
+    min-height: 100vh;  
+    overflow-y: auto;  
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f5f5f5;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-attachment: fixed;
+}
+
+.admin-div{
+    display: block;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    margin: 15px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px var(--shadow-color);
+    max-width: 500px;
+    text-align: center;
+}
+
+.student-div{
+        display: block;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    margin: 15px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px var(--shadow-color);
+    max-width: 500px;
+    text-align: center;
+}
+
+.admin-div {
+    background-color: var(--tertiary-color);
+    color: #333;
+}
+    
+.student-div {
+    background-color: var(--tertiary-color);
+    color: #333;
+}
+
+/* Style links inside admin-div */
+.admin-div a {
+    display: inline-block;
+    padding: 10px 20px;
+    margin: 5px;
+    background-color: var(--primary-color);
+    color: var(--text-color);
+    text-decoration: none;
+    font-weight: bold;
+    border-radius: 20px;
+    transition: background 0.3s ease;
+}
+
+.admin-div a:hover {
+    background-color: #008040;
+}
+
+/* Style links inside student-div */
+.student-div a {
+    display: inline-block;
+    padding: 10px 20px;
+    margin: 5px;
+    background-color: var(--secondary-color);
+    color: var(--text-color);
+    text-decoration: none;
+    font-weight: bold;
+    border-radius: 20px;
+    transition: background 0.3s ease;
+}
+
+.student-div a:hover {
+    background-color: #B29254;
+}
+
+/* Make divs appear side by side on larger screens */
+@media (min-width: 768px) {
+    /* Target only content divs inside <body>, excluding header */
+    body > div {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 20px;
+    }
+
+    .admin-div, .student-div {
+        flex: 1;
+        max-width: 45%;
+    }

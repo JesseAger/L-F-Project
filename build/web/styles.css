@@ -1,11 +1,3 @@
-/*
-Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
-Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/CascadeStyleSheet.css to edit this template
-*/
-/* 
-    Created on : Feb 9, 2024, 3:27:50 PM
-    Author     : FABIUS
-*/
 
 .download-button {
     display: inline-block;
@@ -35,37 +27,13 @@ body {
   
 }
 
-.container {
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 0 20px;
-  margin-top: 20px; 
-}
 
-header {
-  background-color: var(--primary-color);
-  color: white;
-  text-align: center;
-  padding: 20px; /* Reduce padding to reduce space */
-  height: 120px; /* Reduce height to reduce space */
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
-.header-container{
-  max-width: 80%;
-  margin-left: auto;
-  margin-right: auto;
-  align-items: center;
-  padding: 0px;
-}
 
 .nav-links ul {
   list-style-type: none;
   padding: 0;
   margin: 0;
-  display: flex;
+  display: block;
 }
 
 .nav-links ul li {
@@ -109,13 +77,13 @@ h1 {
 }
 
 #homepage-footer {
-    margin-top: 20px;
+    margin-top: 10px;
   background-color: var(--primary-color);
   color: white;
   position: fixed; 
   bottom: 0;
   text-align: center;
-  padding: 15px;
+  padding: 2px;
   font-size: 16px;
   width: 100%; /* This ensures the footer stretches across the full width */
 }
@@ -125,32 +93,13 @@ h1 {
   background-color: var(--primary-color);
   color: white;
   text-align: center;
-  padding: 15px;
+  padding: 2px;
   position: fixed;
   width: 100%;
   bottom: 0;
   font-size: 16px;
 }
 
-  nav a {
-    padding: 10px 20px;
-    margin: 10px;
-    background-color: #00A651;
-    color: white;
-    border-radius: 5px;
-  }
-
-  nav a:hover {
-    background-color: #555;
-    color: black;
-    transform: scale(1.1);
-    transition: transform 0.3s ease;
-  }
-
-  nav a:active {
-    background-color: #888;
-    transform: scale(0.9); 
-  }
 
   .subcategory {
     margin-left: 20px;
@@ -341,11 +290,3 @@ select {
 }
 
 
-/*
-Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
-Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/CascadeStyleSheet.css to edit this template
-*/
-/* 
-    Created on : Feb 9, 2024, 3:27:50 PM
-    Author     : FABIUS
-*/

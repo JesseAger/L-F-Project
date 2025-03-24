@@ -9,10 +9,7 @@ import java.util.logging.Logger;
 import Utils.ServletUtils;
 
 
-/**
- *
- * @author FABIUS
- */
+
 public class ReporterServlet extends HttpServlet {
 
     /**
@@ -71,7 +68,7 @@ public class ReporterServlet extends HttpServlet {
                  if (rowsInserted > 0) {
                      // Display success message
                 
-                     ResponseBuilder.buildRedirectResponse(out, "Reporter details inserted successfully! Kindly visit the security department for verification and confirmation of your lost item.", "homepage.jsp");
+                     ResponseBuilder.buildRedirectResponse(out, "Reporter details inserted successfully! Kindly follow up with the security department for verification and confirmation of your lost item.", "studentDashboard.jsp");
                      
                  } else {
                      ResponseBuilder.buildRedirectResponse(out, "Failed to insert reporter details. Please try again.", "report.jsp");

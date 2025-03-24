@@ -1,9 +1,3 @@
-<%-- 
-    Document   : footer
-    Created on : Feb 19, 2024, 1:08:01?PM
-    Author     : FABIUS
---%>
-
 
 <%@ page import="java.util.*" %>
 <%

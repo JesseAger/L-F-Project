@@ -15,21 +15,8 @@
         </head>
         <body>
             <header>
-                <div class="header-container">
-                    <a href="homepage.jsp">
-                        <img src="images/logo.jpeg" alt="Logo" class="logo-img">
-                    </a>
-
-                    <h1>Egerton University <br>Staff Records Entry</h1>
-                    <nav class="nav-links">
-                        <ul>
-                            <li><a href="homepage.jsp">Home</a></li>
-                            <li><a href="admin-login.jsp">Staff Login</a></li>
-                            <li><a href="report.jsp">Report Lost Item</a> </li>
-                            <li><a href="LogOutServlet">Logout</a></li>
-                        </ul>
-                    </nav>
-                </div>
+                <%@ include file="header.jsp" %>
+                  <a href="LogOutServlet">Logout</a>
             </header>
             <main class="main-content">
                 <form action="RecordsServlet" method="post" enctype="multipart/form-data">

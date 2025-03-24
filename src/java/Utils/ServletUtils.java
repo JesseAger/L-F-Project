@@ -9,9 +9,9 @@ import jakarta.servlet.http.HttpServletResponse;
 
 public class ServletUtils {
 
-    private static final String DB_URL = "jdbc:mysql://localhost:3306/lost_and_founddb4";
+    private static final String DB_URL = "jdbc:mysql://localhost:3306/lostandfound_db";
     private static final String USER = "root";
-    private static final String PASS = "fabius001";
+    private static final String PASS = "uptown101";
 
     static {
         try {
