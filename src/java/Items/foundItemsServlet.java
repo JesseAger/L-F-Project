@@ -31,7 +31,7 @@ public class foundItemsServlet extends HttpServlet {
 
         try {
             conn = ServletUtils.getDBConnection();
-            String sql = "SELECT item_name, description, image AS image_path FROM records WHERE status = 'found'"; 
+            String sql = "SELECT item_name, description, image_path FROM records WHERE status = 'found'";
             stmt = conn.prepareStatement(sql);
             rs = stmt.executeQuery();
 
@@ -39,13 +39,9 @@ public class foundItemsServlet extends HttpServlet {
                 foundItems.add(new FoundItem(
                         rs.getString("item_name"),
                         rs.getString("description"),
-                        rs.getString("image_path") // Ensure column exists
+                        rs.getString("image_path")
                 ));
             }
-
-            // Log fetched items count for debugging
-            System.out.println("Items retrieved: " + foundItems.size());
-
         } catch (Exception e) {
             e.printStackTrace();
             response.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, "Database Error");
@@ -56,23 +52,22 @@ public class foundItemsServlet extends HttpServlet {
             try { if (conn != null) conn.close(); } catch (Exception e) { e.printStackTrace(); }
         }
 
-        // Convert list to JSON
         String json = new Gson().toJson(foundItems);
         PrintWriter out = response.getWriter();
         out.print(json);
         out.flush();
     }
 
-    // Static inner class for FoundItem to avoid serialization issues
-    static class FoundItem {
+    // Inner class for Found Item
+    class FoundItem {
         private String itemName;
         private String description;
-        private String imagePath;
+        private String image;
 
-        public FoundItem(String itemName, String description, String imagePath) {
+        public FoundItem(String itemName, String description, String image) {
             this.itemName = itemName;
             this.description = description;
-            this.imagePath = imagePath;
+            this.image = image;
         }
     }
 }
