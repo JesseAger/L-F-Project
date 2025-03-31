@@ -8,66 +8,8 @@
     <title>Student Dashboard</title>
     <link rel="stylesheet" type="text/css" href="styles.css">
     <link rel="stylesheet" type="text/css" href="header.css">
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 0;
-            background-color: #f4f4f4;
-        }
-        .header {
-            background: #007BFF;
-            color: white;
-            padding: 15px;
-            text-align: center;
-            font-size: 20px;
-            position: relative;
-        }
-        .menu-icon {
-            position: absolute;
-            left: 20px;
-            top: 15px;
-            font-size: 24px;
-            cursor: pointer;
-            display: block;
-        }
-        .sidebar {
-            position: fixed;
-            left: -250px;
-            width: 250px;
-            height: 100%;
-            background: #222;
-            padding-top: 20px;
-            transition: 0.3s;
-        }
-        .sidebar a {
-            display: block;
-            padding: 15px;
-            color: white;
-            text-decoration: none;
-            font-size: 18px;
-            text-align: center;
-        }
-        .sidebar a:hover {
-            background: #007BFF;
-        }
-        .main-content {
-            margin-left: 0;
-            padding: 20px;
-            text-align: center;
-            transition: 0.3s;
-        }
-        .show-sidebar {
-            left: 0;
-        }
-        .full-screen {
-            width: 100%;
-            height: 100vh;
-            background: white;
-            padding: 20px;
-            overflow: auto;
-        }
-    </style>
+    <link rel="stylesheet" type="text/css" href="dashboard.css">
+
 </head>
 <body>
     <header>
@@ -157,6 +99,7 @@
                 loadPage("reportLost");
             });
         });
+        
     </script>
 
 </body>

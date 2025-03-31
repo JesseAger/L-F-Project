@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
- */
 package student;
 
 import java.io.IOException;
@@ -23,13 +19,11 @@ import org.mindrot.jbcrypt.BCrypt;
 @WebServlet(name = "loginServlet", urlPatterns = {"/loginServlet"})
 public class loginServlet extends HttpServlet {
 
-   @Override
+    @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        try {
-
-            Connection conn = ServletUtils.getDBConnection();
-
+        try (Connection conn = ServletUtils.getDBConnection()) {
+            
             String regNo = request.getParameter("regno");
             String password = request.getParameter("password");
 
@@ -43,28 +37,28 @@ public class loginServlet extends HttpServlet {
                     String firstName = rs.getString("firstname");
 
                     if (BCrypt.checkpw(password, storedHashedPassword)) {
-                        // Login successful, create session
+                        // Login successful, create a session
                         HttpSession session = request.getSession();
-                        User student = new User(regNo, storedHashedPassword);
-                        session.setAttribute("student", student);
+                        session.setAttribute("student", new User(regNo, firstName));
+                        session.setMaxInactiveInterval(30 * 60); // 30 minutes timeout
 
+                        // Secure cookie to store session tracking info
                         Cookie ck = new Cookie("student", regNo);
+                        ck.setHttpOnly(true);
+                        ck.setSecure(true);
+                        ck.setMaxAge(30 * 60);
                         response.addCookie(ck);
 
-                        // Show alert and redirect
-                        response.setContentType("text/html");
-                        response.getWriter().println("<script>alert('Welcome " + firstName + "'); window.location='" + request.getContextPath() + "/studentDashboard.jsp';</script>");
+                        response.sendRedirect(request.getContextPath() + "/studentDashboard.jsp");
                     } else {
-                        // Incorrect password
                         response.sendRedirect(request.getContextPath() + "/login.jsp?error=Invalid credentials");
                     }
                 } else {
-                    // User not found
                     response.sendRedirect(request.getContextPath() + "/login.jsp?error=User not found");
                 }
             }
         } catch (SQLException ex) {
-            response.sendRedirect(request.getContextPath() + "/login.jsp?error=Database error: " + ex.getMessage());
+            response.sendRedirect(request.getContextPath() + "/login.jsp?error=Database error");
         }
     }
 }

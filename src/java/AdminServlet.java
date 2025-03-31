@@ -39,13 +39,12 @@ public class AdminServlet extends HttpServlet {
                         // Authentication successful, redirect to records.html
                         HttpSession session = request.getSession();
                         session.setAttribute("user", user);
-                        
-                        
+                                              
                         Cookie ck=new Cookie("user",username);  
                         response.addCookie(ck);
                         if (SessionCheck.isUserLoggedIn(request)) {
                             // User is logged in, continue with the logic
-                            ResponseBuilder.buildRedirectResponse(out, "Successful login, welcome " + username + "!", "records.jsp");
+                            ResponseBuilder.buildRedirectResponse(out, "Successful login, welcome " + username + "!", "adminDashboard.jsp");
                         } 
                         else {
                             // User is not logged in, redirect to login page
