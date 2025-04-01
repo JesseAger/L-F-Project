@@ -1,10 +1,14 @@
+package student;
+
 import Response.ResponseBuilder;
 import java.io.IOException;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.*;
 import java.io.PrintWriter;
 import business.User;
+import jakarta.servlet.annotation.WebServlet;
 
+@WebServlet("/logoutServlet")
 public class logoutServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
