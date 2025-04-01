@@ -1,4 +1,5 @@
 <%@ page import="business.User" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <!DOCTYPE html>
 <html lang="en">
@@ -16,13 +17,11 @@
         <%@include file="header.jsp" %>
     </header>
 
-    <%
-        String username = "User"; // Default name
-        if (session != null && session.getAttribute("student") != null) {
-            User student = (User) session.getAttribute("student");
-            username = student.getUsername(); 
-        }
-    %>
+ <%
+    User student = (User) session.getAttribute("student");
+    String username = (student != null) ? student.getUsername() : "User";
+    pageContext.setAttribute("username", username);
+%>
 
     <div class="header">
         Student Dashboard
@@ -34,12 +33,12 @@
         <a href="#" id="lostItems">Lost Items</a>
         <a href="#" id="foundItems">Found Items</a>
         <a href="#" id="reportLost">Report Lost Item</a>
-<a href="<%= request.getContextPath() %>/logoutServlet" class="logout-button">Logout</a>
+ <a href="<c:url value='/logoutServlet' />" class="logout-button">Logout</a>
     </div>
 
     <!-- Main Content -->
     <div id="main-content" class="main-content">
-        <h2>Explore your Dashboard, <%= username %></h2>
+        <h2>Explore your Dashboard, ${username}</h2>
     </div>
 
     <!-- Cookie Consent Banner -->
