@@ -23,7 +23,7 @@ public class loginServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         try (Connection conn = ServletUtils.getDBConnection()) {
-            
+
             String regNo = request.getParameter("regno");
             String password = request.getParameter("password");
 
@@ -37,21 +37,20 @@ public class loginServlet extends HttpServlet {
                     String firstName = rs.getString("firstname");
 
                     if (BCrypt.checkpw(password, storedHashedPassword)) {
-                        // Login successful, create a session
                         HttpSession session = request.getSession();
                         session.setAttribute("student", new User(regNo, firstName));
-                        session.setMaxInactiveInterval(30 * 60); // 30 minutes timeout
+                        session.setMaxInactiveInterval(30 * 60); 
 
-                        // Secure cookie to store session tracking info
+    
                         Cookie ck = new Cookie("student", regNo);
-                        ck.setHttpOnly(true);
-                        ck.setSecure(true);
-                        ck.setMaxAge(30 * 60);
+                        ck.setHttpOnly(true); 
+                        ck.setSecure(true); 
+                        ck.setMaxAge(30 * 60); 
                         response.addCookie(ck);
 
                         response.sendRedirect(request.getContextPath() + "/studentDashboard.jsp");
                     } else {
-                        response.sendRedirect(request.getContextPath() + "/login.jsp?error=Invalid credentials");
+                        response.sendRedirect(request.getContextPath() + "/login.jsp?error=1");
                     }
                 } else {
                     response.sendRedirect(request.getContextPath() + "/login.jsp?error=User not found");
