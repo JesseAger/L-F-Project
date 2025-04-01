@@ -42,8 +42,36 @@
         <h2>Explore your Dashboard</h2>
     </div>
 
+    <!-- Cookie Consent Banner -->
+    <div id="cookie-banner">
+        This website uses cookies to improve your experience. By clicking "Accept", you consent to the use of cookies.
+        <button onclick="acceptCookies()">Accept</button>
+    </div>
+
     <script>
-    document.addEventListener("DOMContentLoaded", function () {
+// Cookie Consent Logic
+function getCookie(name) {
+    let cookies = document.cookie.split("; ");
+    for (let i = 0; i < cookies.length; i++) {
+        let [cookieName, cookieValue] = cookies[i].split("=");
+        if (cookieName === name) {
+            return cookieValue;
+        }
+    }
+    return null;
+}
+
+function acceptCookies() {
+    document.cookie = "cookiesAccepted=true; path=/; max-age=" + (60 * 60 * 24 * 30); // 30 days
+    document.getElementById("cookie-banner").style.display = "none";
+}
+
+document.addEventListener("DOMContentLoaded", function () {
+    // Show the cookie banner if cookies have not been accepted
+    if (!getCookie("cookiesAccepted")) {
+        document.getElementById("cookie-banner").style.display = "block";
+    }
+
     function toggleSidebar() {
         let sidebar = document.getElementById("sidebar");
         sidebar.classList.toggle("show-sidebar");
@@ -62,32 +90,32 @@
             `;
 
             fetch("foundItemsServlet")
-    .then(response => response.json())
-    .then(items => {
-        let container = document.getElementById("foundItemsContainer");
-        container.innerHTML = "";
+            .then(response => response.json())
+            .then(items => {
+                let container = document.getElementById("foundItemsContainer");
+                container.innerHTML = "";
 
-        items.forEach(item => {
-            let card = document.createElement("div");
-            card.classList.add("card");
+                items.forEach(item => {
+                    let card = document.createElement("div");
+                    card.classList.add("card");
 
-            let imageUrl = `${window.location.origin}/WwebApplication2/uploads/${item.image}`;
-            console.log("Image URL:", imageUrl);  // Debugging: Log image URL
+                    let imageUrl = `${window.location.origin}/WwebApplication2/uploads/${item.image}`;
+                    console.log("Image URL:", imageUrl);  // Debugging: Log image URL
 
-            card.innerHTML = `
-                <img src="${pageContext.request.contextPath}/uploads/${item.image}" 
-     alt="Item Image" 
-     onerror="this.onerror=null; this.src='default.jpg';" />
-                <div class="card-info">
-                    <h3>${item.itemName}</h3>
-                    <p>${item.description}</p>
-                </div>
-            `;
+                    card.innerHTML = `
+                        <img src="${pageContext.request.contextPath}/uploads/${item.image}" 
+                        alt="Item Image" 
+                        onerror="this.onerror=null; this.src='default.jpg';" />
+                        <div class="card-info">
+                            <h3>${item.itemName}</h3>
+                            <p>${item.description}</p>
+                        </div>
+                    `;
 
-            container.appendChild(card);
-        });
-    })
-    .catch(error => console.error("Error fetching found items:", error));
+                    container.appendChild(card);
+                });
+            })
+            .catch(error => console.error("Error fetching found items:", error));
 
         } else if (page === "lostItems") {
             content.innerHTML = "<div class='full-screen'><h2>Lost Items</h2><p>Lost items here...</p></div>";

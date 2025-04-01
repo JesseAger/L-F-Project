@@ -24,7 +24,8 @@
         <a href="#" id="lostItems">Lost Items</a>
         <a href="#" id="foundItems">Found Items</a>
         <a href="#" id="postFound">Post Found Items</a>
-        <a href="<%= request.getContextPath() %>/logout.jsp">Log Out</a>
+        <a href="<%= request.getContextPath() %>/LogOutServlet" class="logout-button">Logout</a>
+
     </div>
 
     <div id="main-content" class="main-content">
@@ -38,9 +39,29 @@
                 sidebar.classList.toggle("show-sidebar");
             }
 
+            function setCookie(name, value, days) {
+                let date = new Date();
+                date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
+                let expires = "expires=" + date.toUTCString();
+                document.cookie = name + "=" + value + ";" + expires + ";path=/";
+            }
+
+            function getCookie(name) {
+                let decodedCookie = decodeURIComponent(document.cookie);
+                let cookies = decodedCookie.split(';');
+                for (let i = 0; i < cookies.length; i++) {
+                    let c = cookies[i].trim();
+                    if (c.indexOf(name + "=") === 0) {
+                        return c.substring(name.length + 1);
+                    }
+                }
+                return "";
+            }
+
             function loadPage(page) {
                 let content = document.getElementById("main-content");
                 document.getElementById("sidebar").classList.remove("show-sidebar");
+                setCookie("lastPage", page, 1);
 
                 if (page === "lostItems") {
                     content.innerHTML = "<div class='full-screen'><h2>Lost Items</h2><p>List of lost items here...</p></div>";
@@ -102,6 +123,11 @@
             document.getElementById("postFound").addEventListener("click", function () {
                 loadPage("postFound");
             });
+
+            let lastPage = getCookie("lastPage");
+            if (lastPage) {
+                loadPage(lastPage);
+            }
         });
     </script>
 
