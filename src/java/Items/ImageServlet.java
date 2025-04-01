@@ -9,22 +9,24 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
-
 @WebServlet("/uploads/*")
 public class ImageServlet extends HttpServlet {
+    private static final String IMAGE_DIRECTORY = "C:/Users/Vintage/Desktop/project1/WebApp/web/uploads";
+
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-
-        // Ensure request is valid
         String requestedImage = request.getPathInfo();
+
+        // Validate request
         if (requestedImage == null || requestedImage.equals("/")) {
             response.sendError(HttpServletResponse.SC_BAD_REQUEST, "Invalid image request");
             return;
         }
 
-        requestedImage = requestedImage.substring(1); // Remove leading "/"
-        File file = new File("C:/Users/Vintage/Desktop/project1/WebApp/build/web/uploads", requestedImage);
+        // Remove leading "/" and construct file path
+        requestedImage = requestedImage.substring(1);
+        File file = new File(IMAGE_DIRECTORY, requestedImage);
 
         // Check if file exists
         if (!file.exists()) {
@@ -32,12 +34,15 @@ public class ImageServlet extends HttpServlet {
             return;
         }
 
-        // Set proper MIME type
+        // Set MIME type
         String mimeType = getServletContext().getMimeType(file.getName());
         if (mimeType == null) {
-            mimeType = "application/octet-stream";
+            mimeType = "image/jpeg"; // Default MIME type for images
         }
         response.setContentType(mimeType);
+        
+        // Enable caching
+        response.setHeader("Cache-Control", "public, max-age=86400");
 
         // Serve the image
         try (FileInputStream fis = new FileInputStream(file)) {

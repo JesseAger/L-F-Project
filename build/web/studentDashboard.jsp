@@ -43,63 +43,97 @@
     </div>
 
     <script>
-        document.addEventListener("DOMContentLoaded", function () {
-            function toggleSidebar() {
-                let sidebar = document.getElementById("sidebar");
-                sidebar.classList.toggle("show-sidebar");
-            }
+    document.addEventListener("DOMContentLoaded", function () {
+    function toggleSidebar() {
+        let sidebar = document.getElementById("sidebar");
+        sidebar.classList.toggle("show-sidebar");
+    }
 
-            function loadPage(page) {
-                let content = document.getElementById("main-content");
-                document.getElementById("sidebar").classList.remove("show-sidebar"); // Hide sidebar
+    function loadPage(page) {
+        let content = document.getElementById("main-content");
+        document.getElementById("sidebar").classList.remove("show-sidebar"); // Hide sidebar
 
-                if (page === "lostItems") {
-                    content.innerHTML = "<div class='full-screen'><h2>Lost Items</h2><p>List of lost items here...</p></div>";
-                } else if (page === "foundItems") {
-                    content.innerHTML = "<div class='full-screen'><h2>Found Items</h2><p>List of found items here...</p></div>";
-                } else if (page === "reportLost") {
-                    content.innerHTML = `
-                        <div class='full-screen'>
-                            <h2>Report Lost Item</h2>
-                            <form name="myform" action="ReporterServlet" method="post">
-                                <label for="name">Name:</label>
-                                <input type="text" id="name" name="name"><br>
+        if (page === "foundItems") {
+            content.innerHTML = `
+                <div class='full-screen'>
+                    <h2>Found Items</h2>
+                    <div id='foundItemsContainer' class='cards-container'></div>
+                </div>
+            `;
 
-                                <label for="contact_number">Contact Number:</label>
-                                <input type="text" id="contactNumber" name="contact_number"><br>
+            fetch("foundItemsServlet")
+    .then(response => response.json())
+    .then(items => {
+        let container = document.getElementById("foundItemsContainer");
+        container.innerHTML = "";
 
-                                <label for="email">Email:</label>
-                                <input type="email" id="email" name="email"><br>
+        items.forEach(item => {
+            let card = document.createElement("div");
+            card.classList.add("card");
 
-                                <label for="location_lost">Location Lost:</label>
-                                <input type="text" id="locationLost" name="location_lost"><br>
+            let imageUrl = `${window.location.origin}/WwebApplication2/uploads/${item.image}`;
+            console.log("Image URL:", imageUrl);  // Debugging: Log image URL
 
-                                <label for="item_lost">Item Lost:</label>
-                                <input type="text" id="itemLost" name="item_lost"><br>
+            card.innerHTML = `
+                <img src="${pageContext.request.contextPath}/uploads/${item.image}" 
+     alt="Item Image" 
+     onerror="this.onerror=null; this.src='default.jpg';" />
+                <div class="card-info">
+                    <h3>${item.itemName}</h3>
+                    <p>${item.description}</p>
+                </div>
+            `;
 
-                                <label for="date_lost">Date Lost:</label>
-                                <input type="date" id="dateLost" name="date_lost"><br>
-
-                                <input type="submit" value="Submit">
-                            </form>
-                        </div>
-                    `;
-                }
-            }
-
-            // Event Listeners
-            document.getElementById("menu-icon").addEventListener("click", toggleSidebar);
-            document.getElementById("lostItems").addEventListener("click", function () {
-                loadPage("lostItems");
-            });
-            document.getElementById("foundItems").addEventListener("click", function () {
-                loadPage("foundItems");
-            });
-            document.getElementById("reportLost").addEventListener("click", function () {
-                loadPage("reportLost");
-            });
+            container.appendChild(card);
         });
-        
+    })
+    .catch(error => console.error("Error fetching found items:", error));
+
+        } else if (page === "lostItems") {
+            content.innerHTML = "<div class='full-screen'><h2>Lost Items</h2><p>Lost items here...</p></div>";
+        } else if (page === "reportLost") {
+            content.innerHTML = `
+                <div class='full-screen'>
+                    <h2>Report Lost Item</h2>
+                    <form action="ReporterServlet" method="post">
+                        <label for="name">Name:</label>
+                        <input type="text" id="name" name="name"><br>
+
+                        <label for="contact_number">Contact Number:</label>
+                        <input type="text" id="contactNumber" name="contact_number"><br>
+
+                        <label for="email">Email:</label>
+                        <input type="email" id="email" name="email"><br>
+
+                        <label for="location_lost">Location Lost:</label>
+                        <input type="text" id="locationLost" name="location_lost"><br>
+
+                        <label for="item_lost">Item Lost:</label>
+                        <input type="text" id="itemLost" name="item_lost"><br>
+
+                        <label for="date_lost">Date Lost:</label>
+                        <input type="date" id="dateLost" name="date_lost"><br>
+
+                        <input type="submit" value="Submit">
+                    </form>
+                </div>
+            `;
+        }
+    }
+
+    // Event Listeners
+    document.getElementById("menu-icon").addEventListener("click", toggleSidebar);
+    document.getElementById("lostItems").addEventListener("click", function () {
+        loadPage("lostItems");
+    });
+    document.getElementById("foundItems").addEventListener("click", function () {
+        loadPage("foundItems");
+    });
+    document.getElementById("reportLost").addEventListener("click", function () {
+        loadPage("reportLost");
+    });
+});
+
     </script>
 
 </body>

@@ -57,7 +57,7 @@
                                 let card = document.createElement("div");
                                 card.classList.add("card");
                                 card.innerHTML = `
-                                    <img src="uploads/${item.image}" alt="Item Image" class="card-image"/>
+                                    <img src="C:/Users/Vintage/Desktop/project1/WebApp/build/web/uploads/${item.image}" alt="Item Image" class="card-image"/>
                                     <div class="card-info">
                                         <h3>${item.itemName}</h3>
                                         <p>${item.description}</p>

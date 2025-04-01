@@ -6,7 +6,6 @@ import java.io.PrintWriter;
 import business.User;
 
 public class LogOutServlet extends HttpServlet {
-
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
