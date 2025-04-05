@@ -9,7 +9,7 @@
 </head>
     <header>
         <div class="header-container">
-            <a href="homepage.jsp">
+<!--            <a href="homepage.jsp">-->
                 <img src="images/logo.png" alt="Logo" class="logo-img">
               </a>
 

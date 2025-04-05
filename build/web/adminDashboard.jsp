@@ -1,4 +1,5 @@
 <%@ page import="business.User" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <!DOCTYPE html>
 <html lang="en">
@@ -24,7 +25,7 @@
         <a href="#" id="lostItems">Lost Items</a>
         <a href="#" id="foundItems">Found Items</a>
         <a href="#" id="postFound">Post Found Items</a>
-        <a href="<%= request.getContextPath() %>/LogOutServlet" class="logout-button">Logout</a>
+    <a href="<c:url value='/LogOutServlet' />" class="logout-button">Logout</a>
 
     </div>
 
@@ -71,14 +72,14 @@
 
                     fetch("foundItemsServlet")
                         .then(response => response.json())
-                        .then(items => {
+                        .then(foundItems => {
                             let container = document.getElementById("foundItemsContainer");
                             container.innerHTML = "";
-                            items.forEach(item => {
+                            foundItems.forEach(item => {
                                 let card = document.createElement("div");
                                 card.classList.add("card");
                                 card.innerHTML = `
-                                    <img src="C:/Users/Vintage/Desktop/project1/WebApp/build/web/uploads/${item.image}" alt="Item Image" class="card-image"/>
+//                          <img src="C:/Users/Vintage/Desktop/project1/WebApp/build/web/uploads/${item.image}" alt="Item Image" class="card-image"/>7
                                     <div class="card-info">
                                         <h3>${item.itemName}</h3>
                                         <p>${item.description}</p>

@@ -91,25 +91,29 @@ document.addEventListener("DOMContentLoaded", function () {
             fetch("foundItemsServlet")
             .then(response => response.json())
             .then(items => {
+                 console.log(items);
                 let container = document.getElementById("foundItemsContainer");
                 container.innerHTML = "";
 
                 items.forEach(item => {
                     let card = document.createElement("div");
                     card.classList.add("card");
-
-                    let imageUrl = `${window.location.origin}/WwebApplication2/uploads/${item.image}`;
+                  
+                    
+                    
+                    let imageUrl = item.image;
                     console.log("Image URL:", imageUrl);  // Debugging: Log image URL
 
                     card.innerHTML = `
-                        <img src="${pageContext.request.contextPath}/uploads/${item.image}" 
+                       <img src="`+imageUrl+`"
                         alt="Item Image" 
-                        onerror="this.onerror=null; this.src='default.jpg';" />
+                      onerror="this.onerror=null; this.src='default.jpg';" /> 
                         <div class="card-info">
-                            <h3>${item.itemName}</h3>
-                            <p>${item.description}</p>
-                        </div>
-                    `;
+                            <h3>`+item.itemName+`</h3>
+                            <p>`+item.description+`</p>
+                            <button class="claim-btn" data-item-no="${item.item_no}">Claim</button>
+                        </div> `
+                    ;
 
                     container.appendChild(card);
                 });
@@ -160,6 +164,7 @@ document.addEventListener("DOMContentLoaded", function () {
         loadPage("reportLost");
     });
 });
+
 
     </script>
 

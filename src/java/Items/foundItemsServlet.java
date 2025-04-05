@@ -64,10 +64,40 @@ public class foundItemsServlet extends HttpServlet {
         private String description;
         private String image;
 
+        public FoundItem() {
+        }
+
         public FoundItem(String itemName, String description, String image) {
             this.itemName = itemName;
             this.description = description;
             this.image = image;
         }
+
+        public String getItemName() {
+            return itemName;
+        }
+
+        public void setItemName(String itemName) {
+            this.itemName = itemName;
+        }
+
+        public String getDescription() {
+            return description;
+        }
+
+        public void setDescription(String description) {
+            this.description = description;
+        }
+
+        public String getImage() {
+            return image;
+        }
+
+        public void setImage(String image) {
+            this.image = image;
+        }
+        
+        
+        
     }
 }
