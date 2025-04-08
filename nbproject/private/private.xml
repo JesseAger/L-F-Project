@@ -4,10 +4,9 @@
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
             <file>file:/C:/Users/Vintage/Desktop/project1/WebApp/web/studentDashboard.jsp</file>
-            <file>file:/C:/Users/Vintage/Desktop/project1/WebApp/src/java/student/loginServlet.java</file>
-            <file>file:/C:/Users/Vintage/Desktop/project1/WebApp/src/java/LogOutServlet.java</file>
-            <file>file:/C:/Users/Vintage/Desktop/project1/WebApp/src/java/ReporterServlet.java</file>
-            <file>file:/C:/Users/Vintage/Desktop/project1/WebApp/web/logout.jsp</file>
+            <file>file:/C:/Users/Vintage/Desktop/project1/WebApp/src/java/Items/foundItemsServlet.java</file>
+            <file>file:/C:/Users/Vintage/Desktop/project1/WebApp/src/java/Items/lostItemServlet.java</file>
+            <file>file:/C:/Users/Vintage/Desktop/project1/WebApp/web/adminDashboard.jsp</file>
         </group>
     </open-files>
 </project-private>

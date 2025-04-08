@@ -66,29 +66,11 @@
 
                 if (page === "lostItems") {
                     content.innerHTML = "<div class='full-screen'><h2>Lost Items</h2><p>List of lost items here...</p></div>";
+                    
                 } else if (page === "foundItems") {
                     let content = document.getElementById("main-content");
                     content.innerHTML = "<div class='full-screen'><h2>Found Items</h2><div id='foundItemsContainer' class='cards-container'></div></div>";
 
-                    fetch("foundItemsServlet")
-                        .then(response => response.json())
-                        .then(foundItems => {
-                            let container = document.getElementById("foundItemsContainer");
-                            container.innerHTML = "";
-                            foundItems.forEach(item => {
-                                let card = document.createElement("div");
-                                card.classList.add("card");
-                                card.innerHTML = `
-//                          <img src="C:/Users/Vintage/Desktop/project1/WebApp/build/web/uploads/${item.image}" alt="Item Image" class="card-image"/>7
-                                    <div class="card-info">
-                                        <h3>${item.itemName}</h3>
-                                        <p>${item.description}</p>
-                                    </div>
-                                `;
-                                container.appendChild(card);
-                            });
-                        })
-                        .catch(error => console.error("Error fetching found items:", error));
                 } else if (page === "postFound") {
                     content.innerHTML = `
                         <div class='full-screen'>

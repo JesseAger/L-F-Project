@@ -26,22 +26,24 @@ public class ReporterServlet extends HttpServlet {
             PrintWriter out = ServletUtils.getPrintWriter(response);
             Connection conn = ServletUtils.getDBConnection();
              
-             String name = request.getParameter("name");
-             String contactNumber = request.getParameter("contact_number");
+             String regNo = request.getParameter("reg_no");
+             String phoneNumber = request.getParameter("phone_number");
              String email = request.getParameter("email");
              String locationLost = request.getParameter("location_lost");
              String itemLost = request.getParameter("item_lost");
+             String Description = request.getParameter("description");
              String dateLost = request.getParameter("date_lost");
              
-                        // Check if the report already exists
-            String checkSql = "SELECT * FROM reporters WHERE name = ? AND contact_number = ? AND email = ? AND location_lost = ? AND item_lost = ? AND date_lost = ?";
+            // Check if the report already exists
+            String checkSql = "SELECT * FROM reporters WHERE reg_no = ? AND phone_number = ? AND email = ? AND location_lost = ? AND item_lost = ? AND description = ? AND date_lost = ?";
             try (PreparedStatement checkStatement = conn.prepareStatement(checkSql)) {
-                checkStatement.setString(1, name);
-                checkStatement.setString(2, contactNumber);
+                checkStatement.setString(1, regNo);
+                checkStatement.setString(2, phoneNumber);
                 checkStatement.setString(3, email);
                 checkStatement.setString(4, locationLost);
                 checkStatement.setString(5, itemLost);
-                checkStatement.setString(6, dateLost);
+                checkStatement.setString(6, Description);
+                checkStatement.setString(7, dateLost);
 
                 ResultSet rs = checkStatement.executeQuery();
                 if (rs.next()) {
@@ -52,16 +54,17 @@ public class ReporterServlet extends HttpServlet {
             }
              
              // Prepare SQL statement
-             String sql = "INSERT INTO reporters (name, contact_number, email, location_lost, item_lost, date_lost) VALUES (?, ?, ?, ?, ?, ?)";
+             String sql = "INSERT INTO reporters (reg_no, phone_number, email, location_lost, item_lost, description, date_lost) VALUES (?, ?, ?, ?, ?, ?, ?)";
              
              // Set parameters and execute SQL statement
              try (PreparedStatement statement = conn.prepareStatement(sql)) {
-                 statement.setString(1, name);
-                 statement.setString(2, contactNumber);
+                 statement.setString(1, regNo);
+                 statement.setString(2, phoneNumber);
                  statement.setString(3, email);
                  statement.setString(4, locationLost);
                  statement.setString(5, itemLost);
-                 statement.setString(6, dateLost);
+                 statement.setString(6, Description);
+                 statement.setString(7, dateLost);
                  
                  // Execute SQL statement
                  int rowsInserted = statement.executeUpdate();

@@ -88,7 +88,7 @@ document.addEventListener("DOMContentLoaded", function () {
                 </div>
             `;
 
-            fetch("foundItemsServlet")
+        fetch("foundItemsServlet")
             .then(response => response.json())
             .then(items => {
                  console.log(items);
@@ -98,8 +98,6 @@ document.addEventListener("DOMContentLoaded", function () {
                 items.forEach(item => {
                     let card = document.createElement("div");
                     card.classList.add("card");
-                  
-                    
                     
                     let imageUrl = item.image;
                     console.log("Image URL:", imageUrl);  // Debugging: Log image URL
@@ -107,14 +105,13 @@ document.addEventListener("DOMContentLoaded", function () {
                     card.innerHTML = `
                        <img src="`+imageUrl+`"
                         alt="Item Image" 
-                      onerror="this.onerror=null; this.src='default.jpg';" /> 
+                        onerror="this.onerror=null; this.src='default.jpg';" /> 
                         <div class="card-info">
                             <h3>`+item.itemName+`</h3>
                             <p>`+item.description+`</p>
-                            <button class="claim-btn" data-item-no="${item.item_no}">Claim</button>
+                            <button>Claim</button>
                         </div> `
                     ;
-
                     container.appendChild(card);
                 });
             })
@@ -127,25 +124,28 @@ document.addEventListener("DOMContentLoaded", function () {
                 <div class='full-screen'>
                     <h2>Report Lost Item</h2>
                     <form action="ReporterServlet" method="post">
-                        <label for="name">Name:</label>
-                        <input type="text" id="name" name="name"><br>
+                          <label for="reg_no">Reg No:</label>
+                          <input type="text" id="regNo" name="reg_no"><br>
 
-                        <label for="contact_number">Contact Number:</label>
-                        <input type="text" id="contactNumber" name="contact_number"><br>
+                          <label for="phone_number">Phone Number:</label>
+                          <input type="text" id="phoneNumber" name="phone_number"><br>
 
-                        <label for="email">Email:</label>
-                        <input type="email" id="email" name="email"><br>
+                          <label for="email">Email:</label>
+                          <input type="email" id="email" name="email"><br>
 
-                        <label for="location_lost">Location Lost:</label>
-                        <input type="text" id="locationLost" name="location_lost"><br>
+                          <label for="location_lost">Location Lost:</label>
+                          <input type="text" id="locationLost" name="location_lost"><br>
 
-                        <label for="item_lost">Item Lost:</label>
-                        <input type="text" id="itemLost" name="item_lost"><br>
+                          <label for="item_lost">Item Lost:</label>
+                          <input type="text" id="itemLost" name="item_lost"><br>
 
-                        <label for="date_lost">Date Lost:</label>
-                        <input type="date" id="dateLost" name="date_lost"><br>
+                          <label for="description">Description:</label>
+                          <input type="text" id="Description" name="description"><br>
 
-                        <input type="submit" value="Submit">
+                          <label for="date_lost">Date Lost:</label>
+                          <input type="date" id="dateLost" name="date_lost"><br>
+
+                          <input type="submit" value="Submit">
                     </form>
                 </div>
             `;
