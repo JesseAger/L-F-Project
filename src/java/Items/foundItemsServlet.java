@@ -41,7 +41,7 @@ public class foundItemsServlet extends HttpServlet {
                         rs.getString("description"),
                         rs.getString("image_path")
                 ));
-            }
+           }
         } catch (Exception e) {
             e.printStackTrace();
             response.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, "Database Error");

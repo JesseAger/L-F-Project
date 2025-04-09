@@ -123,7 +123,7 @@ document.addEventListener("DOMContentLoaded", function () {
             content.innerHTML = `
                 <div class='full-screen'>
                     <h2>Report Lost Item</h2>
-                    <form action="ReporterServlet" method="post">
+                    <form action="ReporterServlet" method="post" enctype="multipart/form-data">
                           <label for="reg_no">Reg No:</label>
                           <input type="text" id="regNo" name="reg_no"><br>
 
@@ -144,6 +144,10 @@ document.addEventListener("DOMContentLoaded", function () {
 
                           <label for="date_lost">Date Lost:</label>
                           <input type="date" id="dateLost" name="date_lost"><br>
+                
+                        <label for="image">Upload Image:</label>
+                        <input type="file" id="image" name="image" accept="image/*" /><br />
+                        <div style="margin-top: 20px;"></div>
 
                           <input type="submit" value="Submit">
                     </form>

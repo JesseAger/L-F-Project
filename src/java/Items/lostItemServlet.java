@@ -31,14 +31,15 @@ public class lostItemServlet extends HttpServlet {
 
         try {
             conn = ServletUtils.getDBConnection();
-            String sql = "SELECT item_lost, description, FROM reporters WHERE status = 'lost'";
+            String sql = "SELECT item_lost, description, image_path FROM reporters WHERE status = 'lost'";
             stmt = conn.prepareStatement(sql);
             rs = stmt.executeQuery();
 
             while (rs.next()) {
                 lostItems.add(new LostItem(
-                        rs.getString("item_name"),
-                        rs.getString("description")
+                        rs.getString("item_lost"),
+                        rs.getString("description"),
+                        rs.getString("image_path")
                 ));
             }
         } catch (Exception e) {
@@ -59,37 +60,41 @@ public class lostItemServlet extends HttpServlet {
 
     // Inner class for Found Item
     class LostItem {
-        private String itemName;
+        private String item_lost;
         private String description;
         private String image;
 
         public LostItem() {
         }
 
-        public LostItem(String itemName, String description) {
-            this.itemName = itemName;
+        public LostItem(String item_lost, String description, String image) {
+            this.item_lost = item_lost;
             this.description = description;
+            this.image = image;
         }
 
-        public String getItemName() {
-            return itemName;
+        public String getitem_lost() {
+            return item_lost;
         }
 
-        public void setItemName(String itemName) {
-            this.itemName = itemName;
+        public void setitem_lost(String item_lost) {
+            this.item_lost = item_lost;
         }
 
-        public String getDescription() {
+        public String getdescription() {
             return description;
         }
 
-        public void setDescription(String description) {
+        public void setdescription(String description) {
             this.description = description;
         }
 
-        public String getImage() {
+        public String getimage() {
             return image;
         }
-                
+
+        public void setimage(String image) {
+            this.image = image;
+        }      
     }
 }

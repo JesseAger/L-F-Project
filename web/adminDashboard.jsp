@@ -65,12 +65,37 @@
                 setCookie("lastPage", page, 1);
 
                 if (page === "lostItems") {
-                    content.innerHTML = "<div class='full-screen'><h2>Lost Items</h2><p>List of lost items here...</p></div>";
-                    
+                    content.innerHTML = "<div class='full-screen'><h2>Lost Items</h2><p>List of lost items here...</p><div id='lostItemContainer' class='cards-container'></div></div>";
+           
+                        fetch("lostItemServlet")
+                        .then(response => response.json())
+                        .then(items => {
+                             console.log(items);
+                            let container = document.getElementById("lostItemContainer");
+                            container.innerHTML = "";
+
+                            items.forEach(item => {
+                                let card = document.createElement("div");
+                                card.classList.add("card");
+
+                                let imageUrl = item.image;
+                                console.log("Image URL:", imageUrl);  // Debugging: Log image URL
+
+                                card.innerHTML = 
+                                  '<img src="' + imageUrl + '" alt="Item Image" onerror="this.onerror=null; this.src=\'default.jpg\';" />' +
+                                  '<div class="card-info">' +
+                                  '<h3>' + item.item_lost + '</h3>' +
+                                  '<p>' + item.description + '</p>' +
+                                  '</div>';
+
+                                container.appendChild(card);
+                            });
+                        })
+                        .catch(error => console.error("Error fetching lost items:", error));
                 } else if (page === "foundItems") {
                     let content = document.getElementById("main-content");
                     content.innerHTML = "<div class='full-screen'><h2>Found Items</h2><div id='foundItemsContainer' class='cards-container'></div></div>";
-
+                        
                 } else if (page === "postFound") {
                     content.innerHTML = `
                         <div class='full-screen'>
