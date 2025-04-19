@@ -18,9 +18,8 @@
     </header>
 
  <%
-    User student = (User) session.getAttribute("student");
-    String username = (student != null) ? student.getUsername() : "User";
-    pageContext.setAttribute("username", username);
+    String username = (String) session.getAttribute("student_name");
+
 %>
 
     <div class="header">
@@ -38,7 +37,7 @@
 
     <!-- Main Content -->
     <div id="main-content" class="main-content">
-        <h2>Explore your Dashboard, ${username}</h2>
+        <h2>Explore your Dashboard, <%= username %></h2>
     </div>
 
     <!-- Cookie Consent Banner -->
@@ -48,6 +47,9 @@
     </div>
 
     <script>
+       
+        
+        
 // Cookie Consent Logic
 function getCookie(name) {
     let cookies = document.cookie.split("; ");
@@ -65,6 +67,8 @@ function acceptCookies() {
     document.getElementById("cookie-banner").style.display = "none";
 }
 
+
+
 document.addEventListener("DOMContentLoaded", function () {
     // Show the cookie banner if cookies have not been accepted
     if (!getCookie("cookiesAccepted")) {
@@ -75,6 +79,7 @@ document.addEventListener("DOMContentLoaded", function () {
         let sidebar = document.getElementById("sidebar");
         sidebar.classList.toggle("show-sidebar");
     }
+      
 
     function loadPage(page) {
         let content = document.getElementById("main-content");
@@ -101,18 +106,27 @@ document.addEventListener("DOMContentLoaded", function () {
                     
                     let imageUrl = item.image;
                     console.log("Image URL:", imageUrl);  // Debugging: Log image URL
-
+                     let itemNo=item.item_no;
+                    
+                   
                     card.innerHTML = `
                        <img src="`+imageUrl+`"
                         alt="Item Image" 
                         onerror="this.onerror=null; this.src='default.jpg';" /> 
                         <div class="card-info">
+                       <form action="claimeditems" method="post" onsubmit="passPValue()">
                             <h3>`+item.itemName+`</h3>
                             <p>`+item.description+`</p>
-                            <button>Claim</button>
+                            <p id= "pTag" > `+item.item_no+` </p>
+                    
+                            <input type="hidden" id="hiddenInput" name="pValue" value=`+item.item_no+`>
+                           <button type="submit" id="myButton">Claim</button>
+                         </form>
                         </div> `
                     ;
                     container.appendChild(card);
+                    
+                   
                 });
             })
             .catch(error => console.error("Error fetching found items:", error));

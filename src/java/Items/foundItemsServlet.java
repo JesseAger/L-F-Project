@@ -31,7 +31,7 @@ public class foundItemsServlet extends HttpServlet {
 
         try {
             conn = ServletUtils.getDBConnection();
-            String sql = "SELECT item_name, description, image_path FROM records WHERE status = 'found'";
+            String sql = "SELECT record_id, item_name, description, image_path FROM records WHERE status = 'found'";
             stmt = conn.prepareStatement(sql);
             rs = stmt.executeQuery();
 
@@ -39,7 +39,8 @@ public class foundItemsServlet extends HttpServlet {
                 foundItems.add(new FoundItem(
                         rs.getString("item_name"),
                         rs.getString("description"),
-                        rs.getString("image_path")
+                        rs.getString("image_path"),
+                        rs.getInt("record_id")
                 ));
            }
         } catch (Exception e) {
@@ -63,14 +64,18 @@ public class foundItemsServlet extends HttpServlet {
         private String itemName;
         private String description;
         private String image;
-
+        private int item_no; 
+        
         public FoundItem() {
         }
 
-        public FoundItem(String itemName, String description, String image) {
-            this.itemName = itemName;
+     
+
+        public FoundItem(String itemname, String description, String image,int item_no) {
+             itemName = itemname;
             this.description = description;
             this.image = image;
+            this.item_no = item_no;
         }
 
         public String getItemName() {
@@ -96,7 +101,13 @@ public class foundItemsServlet extends HttpServlet {
         public void setImage(String image) {
             this.image = image;
         }
-        
+           public int getItem_no() {
+            return item_no;
+        }
+
+        public void setItem_no(int item_no) {
+            this.item_no = item_no;
+        }
         
         
     }

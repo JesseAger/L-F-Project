@@ -38,7 +38,8 @@ public class loginServlet extends HttpServlet {
 
                     if (BCrypt.checkpw(password, storedHashedPassword)) {
                         HttpSession session = request.getSession();
-                        session.setAttribute("student", new User(regNo, firstName));
+                        session.setAttribute("student_name",firstName );
+                        session.setAttribute("Reg_no",regNo);
                         session.setMaxInactiveInterval(30 * 60); 
 
     
