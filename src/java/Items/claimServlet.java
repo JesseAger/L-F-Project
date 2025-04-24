@@ -1,54 +1,36 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
- */
 package Items;
 
-import Utils.ServletUtils;
 import java.io.IOException;
 import java.io.PrintWriter;
-import jakarta.servlet.ServletException;
-import jakarta.servlet.http.HttpServlet;
-import jakarta.servlet.http.HttpServletRequest;
-import jakarta.servlet.http.HttpServletResponse;
-import jakarta.servlet.http.HttpSession;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.util.ArrayList;
+import java.util.List;
+import jakarta.servlet.ServletException;
+import jakarta.servlet.annotation.WebServlet;
+import jakarta.servlet.http.HttpServlet;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
+import com.google.gson.Gson;
+import Utils.ServletUtils;
+import jakarta.servlet.http.HttpSession;
 import java.sql.SQLException;
 import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+@WebServlet(name = "claimServlet", urlPatterns = {"/claimServlet"})
+public class claimServlet extends HttpServlet {
 
-public class claimeditems extends HttpServlet {
-
-  
-//    protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-//            throws ServletException, IOException {
-//        response.setContentType("text/html;charset=UTF-8");
-//        try (PrintWriter out = response.getWriter()) {
-//            /* TODO output your page here. You may use following sample code. */
-//            out.println("<!DOCTYPE html>");
-//            out.println("<html>");
-//            out.println("<head>");
-//            out.println("<title>Servlet claimeditems</title>");
-//            out.println("</head>");
-//            out.println("<body>");
-//            out.println("<h1>Servlet claimeditems at " + request.getContextPath() + "</h1>");
-//            out.println("</body>");
-//            out.println("</html>");
-//        }
-//    }
-
-
+   
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
          response.setContentType("text/html;charset=UTF-8");
          PrintWriter out = response.getWriter();
           
-            String item_no= request.getParameter("pValue");
+            String item_no= request.getParameter("Valuep");
                  
             Connection conn = null;
             PreparedStatement statement = null;
@@ -57,12 +39,12 @@ public class claimeditems extends HttpServlet {
         if (session != null) {
             
              try {
-                 String reg_no=(String) session.getAttribute("Reg_no");
+              
                  conn = ServletUtils.getDBConnection();
                  Date javaDate = new Date();
                  java.sql.Date sqlDate = new java.sql.Date(javaDate.getTime());
                  
-                 String sql = "Update records set claimed=? where record_id=?";
+                 String sql = "Update records set approval=? where record_id=?";
                  statement = conn.prepareStatement(sql);
                  
                  
@@ -94,7 +76,4 @@ public class claimeditems extends HttpServlet {
         
         
     }
-
-  
 }
-

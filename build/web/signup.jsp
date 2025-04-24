@@ -23,7 +23,7 @@
                 let password = document.getElementById("password").value;
                 let confirmPassword = document.getElementById("confirm_password").value;
 
-                let namePattern = /^[A-Za-z]+$/; // Only letters
+                let namePattern = /^[A-Za-z]\{8}+$/; // Only letters
                 let regNoPattern = /^[A-Z]\d{2}\/\d{5}\/\d{2}$/; // S13/09399/29 format
                 let phonePattern = /^\d{10}$/; // Exactly 10 digits
                 let passwordPattern = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/; // Strong password
@@ -32,7 +32,7 @@
 
                 // First Name Validation
                 if (!namePattern.test(firstName)) {
-                    document.getElementById("firstnameError").innerHTML = "Name must contain only alphabetical characters, A-Z.";
+                    document.getElementById("firstnameError").innerHTML = "Name must contain at least 4 alphabetical characters, A-Z.";
                     valid = false;
                 } else {
                     document.getElementById("firstnameError").innerHTML = "";
@@ -40,7 +40,7 @@
 
                 // Last Name Validation
                 if (!namePattern.test(lastName)) {
-                    document.getElementById("lastnameError").innerHTML = "Name must contain only alphabetical characters, A-Z.";
+                    document.getElementById("lastnameError").innerHTML = "Name must contain at least 4 alphabetical characters, A-Z.";
                     valid = false;
                 } else {
                     document.getElementById("lastnameError").innerHTML = "";

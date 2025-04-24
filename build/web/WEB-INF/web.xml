@@ -32,6 +32,22 @@
         <servlet-name>claimeditems</servlet-name>
         <servlet-class>Items.claimeditems</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>ResetPassword</servlet-name>
+        <servlet-class>student.ResetPassword</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>claimServlet</servlet-name>
+        <servlet-class>claim.claimServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>findclaimeditems</servlet-name>
+        <servlet-class>Items.findclaimeditems</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>approve</servlet-name>
+        <servlet-class>Items.approve</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>ReporterServlet</servlet-name>
         <url-pattern>/ReporterServlet</url-pattern>
@@ -55,6 +71,22 @@
     <servlet-mapping>
         <servlet-name>claimeditems</servlet-name>
         <url-pattern>/claimeditems</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>claimServlet</servlet-name>
+        <url-pattern>/claimServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ResetPassword</servlet-name>
+        <url-pattern>/ResetPassword</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>findclaimeditems</servlet-name>
+        <url-pattern>/findclaimeditems</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>approve</servlet-name>
+        <url-pattern>/approve</url-pattern>
     </servlet-mapping>
     <welcome-file-list>
         <welcome-file>

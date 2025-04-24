@@ -32,6 +32,7 @@
         <a href="#" id="lostItems">Lost Items</a>
         <a href="#" id="foundItems">Found Items</a>
         <a href="#" id="reportLost">Report Lost Item</a>
+        <a href="#" id ="getClaims">Claims</a>
  <a href="<c:url value='/logoutServlet' />" class="logout-button">Logout</a>
     </div>
 
@@ -106,7 +107,7 @@ document.addEventListener("DOMContentLoaded", function () {
                     
                     let imageUrl = item.image;
                     console.log("Image URL:", imageUrl);  // Debugging: Log image URL
-                     let itemNo=item.item_no;
+                    
                     
                    
                     card.innerHTML = `

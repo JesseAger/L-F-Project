@@ -25,6 +25,7 @@
         <a href="#" id="lostItems">Lost Items</a>
         <a href="#" id="foundItems">Found Items</a>
         <a href="#" id="postFound">Post Found Items</a>
+        <a href="#" id="getClaims">Claims</a>
     <a href="<c:url value='/LogOutServlet' />" class="logout-button">Logout</a>
 
     </div>
@@ -96,7 +97,14 @@
                     let content = document.getElementById("main-content");
                     content.innerHTML = "<div class='full-screen'><h2>Found Items</h2><div id='foundItemsContainer' class='cards-container'></div></div>";
                         
-                } else if (page === "postFound") {
+                } 
+                 else if (page === "foundItems") {
+                    let content = document.getElementById("main-content");
+                    content.innerHTML = "<div class='full-screen'><h2>Found Items</h2><div id='foundItemsContainer' class='cards-container'></div></div>";
+                        
+                     }
+
+                     else if (page === "postFound") {
                     content.innerHTML = `
                         <div class='full-screen'>
                             <h3>Log Found Items</h3>
@@ -118,8 +126,45 @@
                             <a href="DownloadServlet" class="download-button">Download Report</a><br>
                         </div>
                     `;
+                     }
+                    else if (page === "getClaims"){
+                    content.innerHTML = "<div class='full-screen'><h2>Claims</h2><div id='claimedItemsContainer' class='cards-container'></div></div>";
+                     
+                        fetch("findclaimeditems")
+                        .then(response => response.json())
+                        .then(items => {
+                            console.log(items);
+                            let container = document.getElementById("claimedItemsContainer");
+                            container.innerHTML = "";
+
+                            items.forEach(item => {
+                                let card = document.createElement("div");
+                                card.classList.add("card");
+
+                                let imageUrl = item.image;
+                                console.log("Image URL:", imageUrl);  // Debugging: Log image URL
+
+                                card.innerHTML = `
+                                <div class="card-info">
+                                <form action="approve" method="post" onsubmit="passPValue()">
+                                  <img src="` + imageUrl + `" alt="Item Image" onerror="this.onerror=null; this.src=\'default.jpg\';" />
+                                  <div class="card-info"> 
+                                  
+                                  <h3>` + item.itemName + `</h3> 
+                                  <p>` + item.description + `</p>
+                                  <p id= "pTag" > `+item.item_no+` </p>
+                                <input type="hidden" id="hiddenInput" name="Valuep" value=`+item.item_no+`>
+                                <button type="submit" id="myButton">Claim</button>
+                                </form>
+                                 </div>`
+                    ;
+
+                                container.appendChild(card);
+                            });
+                        });
+                       
                 }
-            }
+        } 
 
             document.getElementById("menu-icon").addEventListener("click", toggleSidebar);
             document.getElementById("lostItems").addEventListener("click", function () {
@@ -128,8 +173,12 @@
             document.getElementById("foundItems").addEventListener("click", function () {
                 loadPage("foundItems");
             });
-            document.getElementById("postFound").addEventListener("click", function () {
+
+            document.getElementById("postFound").addEventListener("click",function () {
                 loadPage("postFound");
+            });
+            document.getElementById("getClaims").addEventListener("click", function () {
+            loadPage("getClaims");
             });
 
             let lastPage = getCookie("lastPage");

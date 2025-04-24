@@ -58,12 +58,13 @@
             <label for="password">Password:</label>
             <input type="password" id="password" name="password" required><br>
 
-            <input type="submit" value="Login">
+            <input type="submit" value="Login"> <br> <br>
+                    <a href="resetPassword.jsp" style = "text-decoration:none; color:#00A651";>Forgot Password?</a>
         </form>
+        <br>
 
         <footer class="footer">
             <%@include file="footer.jsp" %>
         </footer>
-
-    </body>
+        </body>
 </html>

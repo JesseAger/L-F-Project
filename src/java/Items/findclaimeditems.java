@@ -1,22 +1,28 @@
+/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
+ */
 package Items;
 
+import Utils.ServletUtils;
+import com.google.gson.Gson;
 import java.io.IOException;
 import java.io.PrintWriter;
+import jakarta.servlet.ServletException;
+import jakarta.servlet.http.HttpServlet;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
-import jakarta.servlet.ServletException;
-import jakarta.servlet.annotation.WebServlet;
-import jakarta.servlet.http.HttpServlet;
-import jakarta.servlet.http.HttpServletRequest;
-import jakarta.servlet.http.HttpServletResponse;
-import com.google.gson.Gson;
-import Utils.ServletUtils;
 
-@WebServlet(name = "foundItemsServlet", urlPatterns = {"/foundItemsServlet"})
-public class foundItemsServlet extends HttpServlet {
+/**
+ *
+ * @author Vintage
+ */
+public class findclaimeditems extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
@@ -24,19 +30,19 @@ public class foundItemsServlet extends HttpServlet {
         response.setContentType("application/json");
         response.setCharacterEncoding("UTF-8");
 
-        List<FoundItem> foundItems = new ArrayList<>();
+        List<foundItem> foundItems = new ArrayList<>();
         Connection conn = null;
         PreparedStatement stmt = null;
         ResultSet rs = null;
 
         try {
             conn = ServletUtils.getDBConnection();
-            String sql = "SELECT record_id, item_name, description, image_path FROM records WHERE status = 'found'";
+            String sql = "SELECT * FROM records WHERE claimed = 'true'";
             stmt = conn.prepareStatement(sql);
             rs = stmt.executeQuery();
 
             while (rs.next()) {
-                foundItems.add(new FoundItem(
+                foundItems.add(new foundItem(
                         rs.getString("item_name"),
                         rs.getString("description"),
                         rs.getString("image_path"),
@@ -58,21 +64,21 @@ public class foundItemsServlet extends HttpServlet {
         out.print(json);
         out.flush();
     }
-
-    // Inner class for Found Item
-    class FoundItem {
+    
+    
+   class foundItem {
         private String itemName;
         private String description;
         private String image;
         private int item_no; 
         
-        public FoundItem() {
+        public foundItem() {
         }
 
      
 
-        public FoundItem(String itemname, String description, String image,int item_no) {
-            this.itemName = itemname;
+        public foundItem(String itemname, String description, String image,int item_no) {
+             itemName = itemname;
             this.description = description;
             this.image = image;
             this.item_no = item_no;
